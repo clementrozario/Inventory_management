@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Item Management</title>
+</head>
+<body>
+  <h1>Item Management</h1>
+  <form action="/addItem" method="post">
+    <label for="itemName">Item Name:</label>
+    <input type="text" name="itemName" required><br>
+    <label for="description">Description:</label>
+    <input type="text" name="description"><br>
+    <label for="price">Price:</label>
+    <input type="number" name="price" required><br>
+    <label for="quantity">Quantity:</label>
+    <input type="number" name="quantity" required><br>
+    <button type="submit">Add Item</button>
+  </form>
+
+  <h2>Items List:</h2>
+  <ul>
+    <% items.forEach(item => { %>
+      <li>
+        Item: <%= item.itemName %><br>
+        Description: <%= item.description %><br>
+        Price: <%= item.price %><br>
+        Quantity: <%= item.quantity %><br>
+        <button onclick="buyItem('<%= item.id %>', 1)">Buy 1</button>
+        <button onclick="buyItem('<%= item.id %>', 2)">Buy 2</button>
+        <button onclick="buyItem('<%= item.id %>', 3)">Buy 3</button>
+      </li>
+    <% }); %>
+  </ul>
+
+  <script>
+    function buyItem(itemId, quantity) {
+      fetch(`/buyItem/${itemId}/${quantity}`, {
+        method: 'POST'
+      })
+      .then(response => {
+        if (response.ok) {
+          window.location.reload(); // Reload the page after buying
+        }
+      })
+      .catch(error => {
+        console.error('Error buying item:', error);
+      });
+    }
+  </script>
+</body>
+</html>
