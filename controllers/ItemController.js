@@ -1,11 +1,11 @@
-// controllers/ItemController.js
+
 const Item = require('../models/Item');
 
 exports.addItem = async (req, res) => {
   try {
     const { itemName, description, price, quantity } = req.body;
     await Item.create({ itemName, description, price, quantity });
-    res.redirect('/'); // Redirect to the main page after adding an item
+    res.redirect('/'); 
   } catch (error) {
     console.error(error);
     res.status(500).send('Server Error');
@@ -22,7 +22,7 @@ exports.buyItem = async (req, res) => {
     if (item) {
       item.quantity -= quantity;
       if (item.quantity < 0) {
-        item.quantity = 0; // Ensure the quantity doesn't go negative
+        item.quantity = 0; 
       }
       await item.save();
       res.sendStatus(200); // Send a success status
@@ -34,10 +34,6 @@ exports.buyItem = async (req, res) => {
     res.status(500).send('Server Error');
   }
 };
-
-
-// controllers/ItemController.js
-// ... (existing code) ...
 
 exports.deleteItem = async (req, res) => {
   try {

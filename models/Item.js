@@ -1,6 +1,6 @@
-// models/Item.js
+
 const { DataTypes } = require('sequelize');
-const sequelize = require('../config/database'); // Set up your Sequelize instance
+const sequelize = require('../config/database'); 
 
 const Item = sequelize.define('Item', {
   itemName: {

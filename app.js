@@ -2,13 +2,13 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const ItemController = require('./controllers/ItemController');
-const sequelize = require('./config/database'); // Import your Sequelize instance
-const Item = require('./models/Item'); // Import the Item model
+const sequelize = require('./config/database'); 
+const Item = require('./models/Item'); 
 
-// Set up middleware
+
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Sync models with the database
+
 sequelize.sync({ force: false }) // Set force to true if you want to drop and recreate tables
     .then(() => {
         console.log('Database synced');
@@ -17,7 +17,7 @@ sequelize.sync({ force: false }) // Set force to true if you want to drop and re
         console.error('Error syncing database:', error);
     });
 
-// Define routes
+// Defining the routes
 app.get('/', async (req, res) => {
     try {
         const items = await Item.findAll();
@@ -30,7 +30,7 @@ app.get('/', async (req, res) => {
 
 app.post('/addItem', ItemController.addItem);
 
-// Start the server
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
@@ -38,4 +38,4 @@ app.listen(PORT, () => {
 
 app.post('/addItem', ItemController.addItem);
 app.delete('/deleteItem/:itemId', ItemController.deleteItem);
-app.post('/buyItem/:itemId/:quantity', ItemController.buyItem); // New route for buying
+app.post('/buyItem/:itemId/:quantity', ItemController.buyItem);
