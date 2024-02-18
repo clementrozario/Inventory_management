@@ -10,7 +10,7 @@ The Inventory Management System is a web-based application designed to manage in
 - [Installation](#installation)
 - [Usage](#usage)
 - [Code Structure](#code-structure)
-- [Dependencies] (#Dependencies)
+- [Dependencies](#Dependencies)
 ## Features
 
 - Adding new items to the inventory
